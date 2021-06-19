@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" id="Definitions_14ehrj0" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="4.3.0">
+  <bpmn:process id="END_EVENT" isExecutable="true">
+    <bpmn:startEvent id="building_start" name="theStart">
+      <bpmn:outgoing>Flow_0wz9dud</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:endEvent id="Event_1gxbt73" name="theEnd">
+      <bpmn:incoming>Flow_0xpxis7</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:serviceTask id="Activity_0d0852s" name="saveBuildingEntity" camunda:class="org.camunda.service.BuildingSaveService">
+      <bpmn:incoming>Flow_0wz9dud</bpmn:incoming>
+      <bpmn:outgoing>Flow_0xpxis7</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:sequenceFlow id="Flow_0wz9dud" name="" sourceRef="building_start" targetRef="Activity_0d0852s" />
+    <bpmn:sequenceFlow id="Flow_0xpxis7" sourceRef="Activity_0d0852s" targetRef="Event_1gxbt73" />
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="END_EVENT">
+      <bpmndi:BPMNEdge id="Flow_0wz9dud_di" bpmnElement="Flow_0wz9dud">
+        <di:waypoint x="198" y="117" />
+        <di:waypoint x="264" y="117" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0xpxis7_di" bpmnElement="Flow_0xpxis7">
+        <di:waypoint x="387" y="117" />
+        <di:waypoint x="492" y="117" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="Event_0ka7f1o_di" bpmnElement="building_start">
+        <dc:Bounds x="162" y="99" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="161" y="135" width="39" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0d0852s_di" bpmnElement="Activity_0d0852s">
+        <dc:Bounds x="264" y="82" width="123" height="70" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_1gxbt73_di" bpmnElement="Event_1gxbt73">
+        <dc:Bounds x="492" y="99" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="494" y="140" width="34" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

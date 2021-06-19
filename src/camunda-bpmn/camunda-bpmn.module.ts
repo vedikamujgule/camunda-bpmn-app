@@ -1,21 +1,20 @@
 import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
 import {HttpClient} from '@angular/common/http';
 import { HttpClientModule } from '@angular/common/http';
-import { AppComponent } from './app.component';
 import { CamundaModelerComponent } from '../camunda-bpmn/camunda-modeler/camunda-modeler.component';
-
+import { StepEditorComponent } from './step-editor/step-editor.component';
+declare var require: any;
+const $: any = require('jquery');
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    CamundaModelerComponent
-  ],
+  declarations: [StepEditorComponent],
   imports: [
     BrowserModule,
-    HttpClientModule
+    HttpClientModule,
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [CamundaModelerComponent]
 })
-export class AppModule { }
+export class CamundaBPMNModule { }

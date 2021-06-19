@@ -1,5 +1,8 @@
 {
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "cli": {
+    "analytics": "099890d8-b373-4df8-9ed2-bf680aa23251"
+  },
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
@@ -24,9 +27,12 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.css"
+              "./node_modules/bpmn-js/dist/assets/diagram-js.css",
+              "./node_modules/bpmn-js/dist/assets/bpmn-font/css/bpmn-embedded.css",
+              "./node_modules/bpmn-js-properties-panel/styles/properties.less"
             ],
-            "scripts": []
+            "scripts": ["./node_modules/jquery/dist/jquery.js"
+              ]
           },
           "configurations": {
             "production": {
@@ -87,7 +93,6 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.css"
             ],
             "scripts": []
           }
