@@ -7,7 +7,7 @@ import PaletteProvider from 'bpmn-js/lib/features/palette/PaletteProvider';
 import Modeler from 'bpmn-js/lib/Modeler';
 import * as camundaModdlePackage from 'camunda-bpmn-moddle/resources/camunda.json';
 
-
+import TokenSimulationModule from 'bpmn-js-token-simulation/lib/viewer';
 
 
 // import camundaModdlePackage from 'camunda-bpmn-moddle/resources/';
@@ -38,6 +38,7 @@ export const ElementTemplates = _ElementTemplates;
 export const PropertiesPanelModule = _PropertiesPanelModule;
 export const CamundaModdleDescriptor = _CamundaModdleDescriptor;
 export const camundaModdleExtension = _camundaModdleExtension;
+export const _TokenSimulationModule = TokenSimulationModule;
 
 export interface IPaletteProvider {
   getPaletteEntries(): any;

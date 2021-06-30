@@ -1,9 +1,13 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
+import * as BpmnJS from 'bpmn-js/dist/bpmn-navigated-viewer.development.js';
 import * as camundaModdlePackage from 'camunda-bpmn-moddle/resources/camunda.json';
-import { InjectionNames, EntryFactory, BpmnModeler, PropertiesPanelModule, CamundaModdleDescriptor, ElementTemplates, CamundaPropertiesProvider, OriginalPaletteProvider, camundaModdleExtension } from "../../app/bpmn-js/bpmn-js";
+
+import { InjectionNames, EntryFactory, BpmnModeler, PropertiesPanelModule, CamundaModdleDescriptor, ElementTemplates, CamundaPropertiesProvider, OriginalPaletteProvider, camundaModdleExtension , _TokenSimulationModule} from "../../app/bpmn-js/bpmn-js";
 declare var require: any;
 const $: any = require('jquery');
+
 
 @Component({
   selector: 'app-camunda-modeler',
@@ -12,13 +16,15 @@ const $: any = require('jquery');
 })
 export class CamundaModelerComponent implements OnInit {
 
-  title = 'Camunda BPMN Modler';
-  modeler;
-  display = false;
-  overlayHtml: any;
-  overlays: any;
+    title = 'Camunda BPMN Modler';
+    modeler;
+    display = false;
+    overlayHtml: any;
+    overlays: any;
+    BpmnJS: any;
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private router: Router) {
+    this.BpmnJS = new BpmnJS();
   }
 
   ngOnInit(): void {
@@ -34,7 +40,7 @@ export class CamundaModelerComponent implements OnInit {
         camundaModdleExtension,
         PropertiesPanelModule,
         camundaModdlePackage,
-
+        _TokenSimulationModule
       ],
       propertiesPanel: {
         // parent: '#properties'
@@ -52,7 +58,7 @@ export class CamundaModelerComponent implements OnInit {
   handleError(err: any) {
     if (err) {
       console.warn('Ups, error: ', err);
-    }
+    } 
   }
   createNew() {
     const url = '../assets/bpmn/initial.bpmn';
@@ -69,13 +75,14 @@ export class CamundaModelerComponent implements OnInit {
     );
   }
 
-displayPopup(){
-  console.log("displayPopup called");
-  this.display = true;
-}
-  
+  displayPopup() {
+    console.log("displayPopup called");
+    this.display = true;
+  }
+
   //fucntion to load bpmn present in assets
   load() {
+    const router = this.router;
     const url = '../assets/bpmn/saveBuildingEntity.bpmn';
     this.http.get(url, {
       headers: { observe: 'response' }, responseType: 'text'
@@ -98,7 +105,7 @@ displayPopup(){
           html: this.overlayHtml
         });
 
-         
+
         // endEventNode.addEventListener('click', function(e) {
         //   overlays.add('END_EVENT', {
         //     position: {
@@ -110,7 +117,7 @@ displayPopup(){
         //     html: '<label for="fname">First name:</label><br> <input type="text" id="fname" name="fname" value="John"><br><label for="lname">Last name:</label><br><input type="text" id="lname" name="lname" value="Doe"><br><br> <button onclick="myFunction()">Click me</button> <script>  myFunction(){console.log("called methoad to remove overlay")}</script>'
         //   });
         // });
-        
+
         // remove by element and/or type
         this.overlays.remove({ element: 'SCAN_OK' });
 
@@ -131,7 +138,7 @@ displayPopup(){
         // });
 
 
-       
+
         const { warnings } = result;
         console.log(warnings);
       },
@@ -139,10 +146,10 @@ displayPopup(){
     );
     this.overlayHtml = $(`<img src="../assets/edit.jpg" style="width: 30px; height: 30px;" alt="edit" onclick="alert('click event occured')">`);
 
-    this.overlayHtml.click(function(e) {
+    this.overlayHtml.click(function (e) {
       this.display = !this.display;
-      this.displayPopup();
-      console.log("display flag", this.display);
+      router.navigate(['StepEditor'])
+      console.log("display flag", this.display); 
       // (click)="openModal('custom-modal-1')
     });
   }
@@ -183,10 +190,10 @@ displayPopup(){
       link.removeClass('active');
     }
   }
-}
 
-function displayPopup() {
-  
-  throw new Error('Function not implemented.');
+  // component method
+  public zoomIn() {
+    this.BpmnJS.get('zoomScroll').stepZoom(1);
+  }
 }
 

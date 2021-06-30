@@ -1,7 +1,9 @@
 /* You can add global styles to this file, and also import other style files */
 @import "~bpmn-js/dist/assets/diagram-js.css";
 @import "~bpmn-js/dist/assets/bpmn-font/css/bpmn.css";
-
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 html, body, my-app > div  {
   height: 100%;
 }
